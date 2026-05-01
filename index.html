@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motche — Confirmação de Entrega | Dia das Mães</title>
+<meta name="description" content="Formulário de confirmação de entrega das cestas de café da manhã da Motche para o Dia das Mães." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* =================================================================
+   MOTCHE — FORMULÁRIO OPERAÇÃO MADRUGADA
+   Design system
+   ================================================================= */
+
+:root {
+  --preto: #0a0a0a;
+  --preto-suave: #1a1a1a;
+  --grafite: #2a2a2a;
+  --dourado: #E5BC88;
+  --dourado-claro: #f0d4a8;
+  --dourado-escuro: #B8860B;
+  --creme: #faf6ee;
+  --creme-claro: #fdfaf3;
+  --branco: #ffffff;
+  --cinza-claro: #e8e3d8;
+  --cinza-medio: #8a8578;
+  --cinza-escuro: #4a4438;
+  --vermelho-vinho: #8B1538;
+  --vermelho-claro: #fef2f4;
+  --verde-sucesso: #2d5f3f;
+  --verde-claro: #ecf5ee;
+
+  --fonte-display: 'Cormorant Garamond', Georgia, serif;
+  --fonte-body: 'Manrope', system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --sombra-suave: 0 1px 3px rgba(10, 10, 10, 0.04), 0 4px 16px rgba(10, 10, 10, 0.04);
+  --sombra-elevada: 0 4px 20px rgba(10, 10, 10, 0.08), 0 12px 40px rgba(10, 10, 10, 0.06);
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fonte-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--preto);
+  background: var(--creme);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(229, 188, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(229, 188, 136, 0.05) 0%, transparent 50%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =================================================================
+   TOPO / HEADER
+   ================================================================= */
+
+.topo {
+  background: var(--preto);
+  color: var(--creme);
+  padding: 28px 24px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--dourado);
+  position: relative;
+}
+
+.topo::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--dourado);
+}
+
+.logo {
+  font-family: var(--fonte-display);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--dourado);
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.subtitulo-topo {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--cinza-claro);
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* =================================================================
+   CONTAINER PRINCIPAL
+   ================================================================= */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.formulario-wrap {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra-elevada);
+  margin: 32px auto;
+  overflow: hidden;
+  position: relative;
+}
+
+/* =================================================================
+   PROGRESSO
+   ================================================================= */
+
+.progresso-container {
+  background: var(--creme-claro);
+  padding: 20px 32px 16px;
+  border-bottom: 1px solid var(--cinza-claro);
+}
+
+.progresso-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cinza-escuro);
+  font-weight: 600;
+}
+
+.progresso-percent {
+  color: var(--dourado-escuro);
+}
+
+.progresso-barra {
+  width: 100%;
+  height: 4px;
+  background: var(--cinza-claro);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progresso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--dourado-escuro) 0%, var(--dourado) 100%);
+  border-radius: 2px;
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+/* =================================================================
+   STEPS
+   ================================================================= */
+
+.step {
+  display: none;
+  padding: 40px 32px 32px;
+  animation: fadeSlide 400ms ease;
+}
+
+.step.ativo { display: block; }
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-titulo {
+  font-family: var(--fonte-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--preto);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.step-titulo .ornamento {
+  color: var(--dourado-escuro);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.step-numero {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dourado-escuro);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.step-descricao {
+  color: var(--cinza-escuro);
+  font-size: 15px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+/* =================================================================
+   PERGUNTAS / CAMPOS
+   ================================================================= */
+
+.pergunta {
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.pergunta-numero-label {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.pergunta-numero {
+  font-family: var(--fonte-display);
+  font-size: 18px;
+  color: var(--dourado-escuro);
+  font-weight: 600;
+  font-style: italic;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+.pergunta-label {
+  font-weight: 600;
+  color: var(--preto);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.pergunta-label .obrigatoria {
+  color: var(--vermelho-vinho);
+  margin-left: 2px;
+}
+
+.pergunta-ajuda {
+  font-size: 13px;
+  color: var(--cinza-escuro);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  padding-left: 42px;
+  font-style: italic;
+}
+
+/* Inputs */
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--cinza-claro);
+  border-radius: var(--radius-md);
+  font-family: var(--fonte-body);
+  font-size: 15px;
+  color: var(--preto);
+  background: var(--branco);
+  transition: var(--transition);
+  font-weight: 400;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: var(--dourado);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--dourado-escuro);
+  box-shadow: 0 0 0 3px rgba(229, 188, 136, 0.15);
+}
+
+.textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+
+/* Opções (radio/checkbox custom) */
+.opcoes { display: flex; flex-direction: column; gap: 8px; }
+
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--cinza-claro);
+  border-radius: var(--radius-md);
+  background: var(--branco);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.opcao:hover {
+  border-color: var(--dourado);
+  background: var(--creme-claro);
+}
+
+.opcao input[type="radio"],
+.opcao input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opcao .indicador {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cinza-medio);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  background: var(--branco);
+}
+
+.opcao input[type="radio"] + .indicador { border-radius: 50%; }
+.opcao input[type="checkbox"] + .indicador { border-radius: 4px; }
+
+.opcao .indicador::after {
+  content: "";
+  opacity: 0;
+  transform: scale(0);
+  transition: var(--transition);
+}
+
+.opcao input[type="radio"] + .indicador::after {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dourado-escuro);
+}
+
+.opcao input[type="checkbox"] + .indicador::after {
+  width: 5px;
+  height: 9px;
+  border: solid var(--dourado-escuro);
+  border-width: 0 2px 2px 0;
+  transform: scale(0) rotate(45deg);
+  margin-bottom: 2px;
+}
+
+.opcao input:checked ~ .indicador {
+  border-color: var(--dourado-escuro);
+  background: var(--creme);
+}
+
+.opcao input:checked ~ .indicador::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.opcao input[type="checkbox"]:checked ~ .indicador::after {
+  transform: scale(1) rotate(45deg);
+}
+
+.opcao input:checked ~ .opcao-texto {
+  color: var(--preto);
+  font-weight: 600;
+}
+
+.opcao:has(input:checked) {
+  border-color: var(--dourado-escuro);
+  background: var(--creme-claro);
+}
+
+.opcao-texto {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--cinza-escuro);
+  flex: 1;
+}
+
+.opcao-texto strong {
+  color: var(--preto);
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.opcao-texto em {
+  font-style: normal;
+  color: var(--vermelho-vinho);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* =================================================================
+   BLOCOS DE INSTRUÇÃO / ALERTA
+   ================================================================= */
+
+.bloco-alerta {
+  background: linear-gradient(135deg, var(--vermelho-claro) 0%, #fff8f9 100%);
+  border-left: 4px solid var(--vermelho-vinho);
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  margin: 20px 0 24px;
+  display: none;
+  animation: fadeSlide 300ms ease;
+}
+
+.bloco-alerta.ativo { display: block; }
+
+.bloco-alerta-titulo {
+  font-weight: 700;
+  color: var(--vermelho-vinho);
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bloco-alerta-icon {
+  width: 18px;
+  height: 18px;
+  background: var(--vermelho-vinho);
+  color: var(--branco);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bloco-alerta-corpo {
+  color: var(--preto);
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.bloco-alerta-corpo strong {
+  color: var(--vermelho-vinho);
+  font-weight: 700;
+}
+
+.bloco-info {
+  background: linear-gradient(135deg, var(--creme-claro) 0%, var(--creme) 100%);
+  border-left: 3px solid var(--dourado-escuro);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin: 16px 0 20px;
+  display: none;
+  animation: fadeSlide 300ms ease;
+}
+
+.bloco-info.ativo { display: block; }
+
+.bloco-info-titulo {
+  font-family: var(--fonte-display);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--dourado-escuro);
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.bloco-info-corpo {
+  font-size: 13.5px;
+  color: var(--cinza-escuro);
+  line-height: 1.55;
+}
+
+/* =================================================================
+   GRUPO CONDICIONAL
+   ================================================================= */
+
+.condicional {
+  display: none;
+  animation: fadeSlide 300ms ease;
+}
+
+.condicional.ativo { display: block; }
+
+.divisor-secao {
+  text-align: center;
+  margin: 32px 0 20px;
+  position: relative;
+  font-family: var(--fonte-display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--dourado-escuro);
+  letter-spacing: 0.08em;
+}
+
+.divisor-secao::before,
+.divisor-secao::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 90px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+}
+
+.divisor-secao::before { left: 0; }
+.divisor-secao::after { right: 0; }
+
+/* =================================================================
+   AÇÕES (BOTÕES)
+   ================================================================= */
+
+.acoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 24px 32px 32px;
+  border-top: 1px solid var(--cinza-claro);
+  background: var(--creme-claro);
+}
+
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--fonte-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primario {
+  background: var(--preto);
+  color: var(--dourado);
+  border: 1.5px solid var(--preto);
+}
+
+.btn-primario:hover:not(:disabled) {
+  background: var(--grafite);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10, 10, 10, 0.15);
+}
+
+.btn-primario:disabled {
+  background: var(--cinza-medio);
+  border-color: var(--cinza-medio);
+  color: var(--cinza-claro);
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--cinza-escuro);
+  border: 1.5px solid var(--cinza-claro);
+}
+
+.btn-secundario:hover {
+  border-color: var(--cinza-escuro);
+  color: var(--preto);
+}
+
+.btn-secundario.invisible { visibility: hidden; }
+
+/* =================================================================
+   VALIDAÇÃO
+   ================================================================= */
+
+.input-erro,
+.opcoes-erro {
+  border-color: var(--vermelho-vinho) !important;
+}
+
+.opcoes.opcoes-erro .opcao {
+  border-color: var(--vermelho-vinho);
+}
+
+.mensagem-erro {
+  color: var(--vermelho-vinho);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-top: 6px;
+  padding-left: 42px;
+  display: none;
+}
+
+.mensagem-erro.ativo { display: block; }
+
+/* =================================================================
+   TELA DE SUCESSO
+   ================================================================= */
+
+.sucesso {
+  display: none;
+  text-align: center;
+  padding: 60px 32px;
+  animation: fadeSlide 600ms ease;
+}
+
+.sucesso.ativo { display: block; }
+
+.sucesso-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: var(--verde-claro);
+  border: 2px solid var(--verde-sucesso);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sucesso-icon svg {
+  width: 40px;
+  height: 40px;
+  color: var(--verde-sucesso);
+}
+
+.sucesso-titulo {
+  font-family: var(--fonte-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--preto);
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.sucesso-titulo em {
+  color: var(--dourado-escuro);
+  font-style: italic;
+}
+
+.sucesso-descricao {
+  color: var(--cinza-escuro);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.sucesso-resumo {
+  background: var(--creme-claro);
+  border: 1px solid var(--cinza-claro);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sucesso-resumo-titulo {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dourado-escuro);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.sucesso-resumo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--cinza-claro);
+  font-size: 14px;
+}
+
+.sucesso-resumo-item:last-child { border-bottom: none; }
+
+.sucesso-resumo-label {
+  color: var(--cinza-escuro);
+  font-weight: 500;
+}
+
+.sucesso-resumo-valor {
+  color: var(--preto);
+  font-weight: 700;
+}
+
+.janela-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.janela-tag.madrugada {
+  background: var(--preto);
+  color: var(--dourado);
+}
+
+.janela-tag.manha {
+  background: var(--dourado);
+  color: var(--preto);
+}
+
+/* =================================================================
+   INDICADOR DE JANELA (PREVIEW DURANTE PREENCHIMENTO)
+   ================================================================= */
+
+.indicador-janela {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--preto) 0%, var(--grafite) 100%);
+  color: var(--creme);
+  border-radius: var(--radius-md);
+  margin: 20px 0;
+  border: 1px solid var(--dourado);
+  animation: fadeSlide 300ms ease;
+}
+
+.indicador-janela.ativo { display: flex; }
+
+.indicador-janela-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--dourado);
+  color: var(--preto);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.indicador-janela-texto {
+  flex: 1;
+}
+
+.indicador-janela-titulo {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.indicador-janela-descricao {
+  font-size: 14px;
+  color: var(--creme);
+  line-height: 1.4;
+}
+
+.indicador-janela-descricao strong {
+  font-weight: 700;
+  font-family: var(--fonte-display);
+  font-size: 18px;
+  color: var(--dourado);
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* =================================================================
+   RESPONSIVO
+   ================================================================= */
+
+@media (max-width: 600px) {
+  .topo { padding: 22px 16px 18px; }
+  .logo { font-size: 26px; }
+  .formulario-wrap { margin: 16px auto; border-radius: var(--radius-md); }
+  .step { padding: 28px 20px 24px; }
+  .step-titulo { font-size: 26px; }
+  .progresso-container { padding: 16px 20px 12px; }
+  .acoes { padding: 18px 20px 22px; flex-direction: column-reverse; }
+  .btn { width: 100%; justify-content: center; }
+  .btn-secundario.invisible { display: none; }
+  .sucesso { padding: 40px 20px; }
+  .sucesso-titulo { font-size: 28px; }
+  .pergunta-ajuda { padding-left: 0; }
+  .mensagem-erro { padding-left: 0; }
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+
+.footer {
+  text-align: center;
+  padding: 24px 20px 40px;
+  color: var(--cinza-medio);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.footer-marca {
+  font-family: var(--fonte-display);
+  font-size: 16px;
+  color: var(--dourado-escuro);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* =================================================================
+   AUTOSAVE INDICATOR
+   ================================================================= */
+
+.autosave {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--preto);
+  color: var(--dourado);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition);
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.autosave.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.autosave::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--dourado);
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topo">
+  <div class="logo">Motche</div>
+  <div class="subtitulo-topo">Padaria Artesanal · Dia das Mães 2026</div>
+</header>
+
+<div class="container">
+  <div class="formulario-wrap">
+
+    <!-- PROGRESSO -->
+    <div class="progresso-container" id="progresso-container">
+      <div class="progresso-info">
+        <span id="progresso-step-label">Etapa 1 de 7</span>
+        <span class="progresso-percent" id="progresso-percent">14%</span>
+      </div>
+      <div class="progresso-barra">
+        <div class="progresso-fill" id="progresso-fill"></div>
+      </div>
+    </div>
+
+    <form id="form-motche" autocomplete="on" novalidate>
+
+      <!-- ============================================================
+           STEP 0 — INTRODUÇÃO
+           ============================================================ -->
+      <div class="step ativo" data-step="0">
+        <div class="step-numero">Bem-vinda</div>
+        <h1 class="step-titulo">Vamos preparar a <span class="ornamento">surpresa perfeita</span> para a sua mãe</h1>
+        <p class="step-descricao">
+          Para garantir que a cesta de café da manhã chegue exatamente no momento certo na madrugada do Dia das Mães, precisamos de algumas informações sobre o local de entrega. O preenchimento leva cerca de 5 minutos.
+        </p>
+
+        <div class="bloco-info ativo">
+          <div class="bloco-info-titulo">Como funciona a operação</div>
+          <div class="bloco-info-corpo">
+            Nossa entrega acontece principalmente <strong>entre 00h e 05h30 da madrugada</strong>, para que a cesta esteja esperando quando sua mãe acordar. Em endereços onde não há porteiro 24h para receber, a entrega acontece no <strong>início da manhã, entre 05h30 e 09h00</strong>. Você não precisa escolher a janela — ela é definida automaticamente conforme o tipo do seu endereço.
+          </div>
+        </div>
+
+        <div class="bloco-alerta ativo" style="margin-top: 16px;">
+          <div class="bloco-alerta-titulo">
+            <span class="bloco-alerta-icon">!</span>
+            Importante antes de começar
+          </div>
+          <div class="bloco-alerta-corpo">
+            Tenha em mãos: <strong>o número do seu pedido</strong>, o <strong>endereço completo da entrega</strong>, o <strong>WhatsApp da homenageada</strong> e — se for em prédio com porteiro — a confirmação de que você <strong>avisou previamente o porteiro</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 1 — DADOS DO PEDIDO
+           ============================================================ -->
+      <div class="step" data-step="1">
+        <div class="step-numero">Seção 1 de 7</div>
+        <h1 class="step-titulo">Sobre o <span class="ornamento">seu pedido</span></h1>
+        <p class="step-descricao">Vamos vincular suas respostas ao pedido correto e abrir o canal de contato no dia da entrega.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.1</span>
+            <label class="pergunta-label" for="numero_pedido">Número do pedido<span class="obrigatoria">*</span></label>
+          </div>
+          <div class="pergunta-ajuda">Aparece no e-mail e no WhatsApp de confirmação da compra.</div>
+          <input type="text" id="numero_pedido" name="numero_pedido" class="input" data-required placeholder="Ex.: #MOT-2026-0123" />
+          <div class="mensagem-erro">Por favor, informe o número do pedido.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.2</span>
+            <label class="pergunta-label" for="comprador_nome">Nome completo do comprador<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="comprador_nome" name="comprador_nome" class="input" data-required placeholder="Como aparece no documento" />
+          <div class="mensagem-erro">Por favor, informe seu nome completo.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.3</span>
+            <label class="pergunta-label" for="comprador_cpf">CPF do comprador<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="comprador_cpf" name="comprador_cpf" class="input" data-required data-mask="cpf" placeholder="000.000.000-00" inputmode="numeric" />
+          <div class="mensagem-erro">CPF inválido. Verifique e tente novamente.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.4</span>
+            <label class="pergunta-label" for="comprador_whatsapp">WhatsApp do comprador<span class="obrigatoria">*</span></label>
+          </div>
+          <div class="pergunta-ajuda">Canal principal de comunicação no dia da entrega — confirme que aceita receber mensagens nesse número.</div>
+          <input type="tel" id="comprador_whatsapp" name="comprador_whatsapp" class="input" data-required data-mask="telefone" placeholder="(81) 99999-9999" inputmode="tel" />
+          <div class="mensagem-erro">Telefone inválido. Use o formato (DD) 9XXXX-XXXX.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.5</span>
+            <label class="pergunta-label" for="comprador_email">E-mail<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="email" id="comprador_email" name="comprador_email" class="input" data-required placeholder="seu@email.com" />
+          <div class="mensagem-erro">E-mail inválido.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">1.6</span>
+            <label class="pergunta-label" for="comprador_telefone_alt">Telefone alternativo <span style="color: var(--cinza-medio); font-weight: 400;">(opcional)</span></label>
+          </div>
+          <div class="pergunta-ajuda">Para o caso do WhatsApp principal estar desligado durante a entrega.</div>
+          <input type="tel" id="comprador_telefone_alt" name="comprador_telefone_alt" class="input" data-mask="telefone" placeholder="(81) 99999-9999" inputmode="tel" />
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 2 — DADOS DA HOMENAGEADA
+           ============================================================ -->
+      <div class="step" data-step="2">
+        <div class="step-numero">Seção 2 de 7</div>
+        <h1 class="step-titulo">Sobre a <span class="ornamento">homenageada</span></h1>
+        <p class="step-descricao">Quem é a estrela do dia. Esses dados garantem identificação correta e abrem um canal alternativo em caso de imprevisto.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">2.1</span>
+            <label class="pergunta-label" for="mae_nome">Nome completo da homenageada<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="mae_nome" name="mae_nome" class="input" data-required placeholder="Nome completo" />
+          <div class="mensagem-erro">Informe o nome completo da homenageada.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">2.2</span>
+            <label class="pergunta-label" for="mae_apelido">Como ela é chamada carinhosamente?<span class="obrigatoria">*</span></label>
+          </div>
+          <div class="pergunta-ajuda">Será usado no bilhete e no destinatário da embalagem. Ex.: Mainha, Mãe, Vó Lúcia, Tia Marta.</div>
+          <input type="text" id="mae_apelido" name="mae_apelido" class="input" data-required placeholder="Apelido carinhoso" />
+          <div class="mensagem-erro">Informe o apelido carinhoso.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">2.3</span>
+            <label class="pergunta-label" for="mae_whatsapp">WhatsApp da homenageada<span class="obrigatoria">*</span></label>
+          </div>
+          <div class="pergunta-ajuda">Pode ser usado em caso de imprevisto durante a entrega. Não enviaremos nada antes — apenas se for necessário.</div>
+          <input type="tel" id="mae_whatsapp" name="mae_whatsapp" class="input" data-required data-mask="telefone" placeholder="(81) 99999-9999" inputmode="tel" />
+          <div class="mensagem-erro">Telefone inválido. Use o formato (DD) 9XXXX-XXXX.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">2.4</span>
+            <span class="pergunta-label">A homenageada sabe que vai receber a cesta?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Importante: a resposta aqui não altera o horário de entrega — em prédios com porteiro 24h a cesta é entregue ao porteiro independentemente da homenageada saber. A informação serve para o entregador adequar a abordagem.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="mae_ciencia" value="avisada" /><span class="indicador"></span><span class="opcao-texto">Sim — ela está avisada e estará esperando</span></label>
+            <label class="opcao"><input type="radio" name="mae_ciencia" value="parcial" /><span class="indicador"></span><span class="opcao-texto">Sim — ela sabe que vai chegar algo, mas não sabe horário nem o que é</span></label>
+            <label class="opcao"><input type="radio" name="mae_ciencia" value="surpresa" /><span class="indicador"></span><span class="opcao-texto">Não — é surpresa total</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">2.5</span>
+            <span class="pergunta-label">Em caso de imprevisto, podemos contatá-la diretamente?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="mae_contato_autorizado" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, pode falar com ela</span></label>
+            <label class="opcao"><input type="radio" name="mae_contato_autorizado" value="apenas_se" /><span class="indicador"></span><span class="opcao-texto">Apenas se eu (comprador) estiver indisponível</span></label>
+            <label class="opcao"><input type="radio" name="mae_contato_autorizado" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não, fale apenas comigo</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 3 — ENDEREÇO
+           ============================================================ -->
+      <div class="step" data-step="3">
+        <div class="step-numero">Seção 3 de 7</div>
+        <h1 class="step-titulo">Onde <span class="ornamento">entregar</span></h1>
+        <p class="step-descricao">De madrugada o comércio está fechado. Por isso precisamos de referências visíveis 24h para chegar com precisão ao endereço.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.1</span>
+            <label class="pergunta-label" for="end_cep">CEP<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="end_cep" name="end_cep" class="input" data-required data-mask="cep" placeholder="00000-000" inputmode="numeric" />
+          <div class="mensagem-erro">CEP inválido.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.2</span>
+            <label class="pergunta-label" for="end_logradouro">Rua / Avenida<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="end_logradouro" name="end_logradouro" class="input" data-required placeholder="Ex.: Rua das Graças" />
+          <div class="mensagem-erro">Informe a rua ou avenida.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.3</span>
+            <label class="pergunta-label" for="end_numero">Número<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="end_numero" name="end_numero" class="input" data-required placeholder="Ex.: 1234" />
+          <div class="mensagem-erro">Informe o número.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.4</span>
+            <label class="pergunta-label" for="end_complemento">Complemento <span style="color: var(--cinza-medio); font-weight: 400;">(opcional)</span></label>
+          </div>
+          <div class="pergunta-ajuda">Apto, bloco, torre, casa. Ex.: Apto 1204, Bloco B.</div>
+          <input type="text" id="end_complemento" name="end_complemento" class="input" placeholder="Apto 1204, Bloco B" />
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.5</span>
+            <label class="pergunta-label" for="end_bairro">Bairro<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="end_bairro" name="end_bairro" class="input" data-required placeholder="Ex.: Boa Viagem" />
+          <div class="mensagem-erro">Informe o bairro.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.6</span>
+            <label class="pergunta-label" for="end_cidade">Cidade<span class="obrigatoria">*</span></label>
+          </div>
+          <input type="text" id="end_cidade" name="end_cidade" class="input" data-required value="Recife" placeholder="Ex.: Recife" />
+          <div class="mensagem-erro">Informe a cidade.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.7</span>
+            <label class="pergunta-label" for="end_referencia">Ponto de referência visível à noite<span class="obrigatoria">*</span></label>
+          </div>
+          <div class="pergunta-ajuda">Use referências visíveis 24h: posto de gasolina, esquina, cor do portão, número visível, próximo a tal praça. Evite referenciar comércio que fecha à noite.</div>
+          <textarea id="end_referencia" name="end_referencia" class="textarea" data-required placeholder="Ex.: Em frente ao posto Shell, portão preto com número grande na fachada"></textarea>
+          <div class="mensagem-erro">Informe um ponto de referência visível à noite.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">3.8</span>
+            <label class="pergunta-label" for="end_maps">Link do Google Maps com pin no endereço exato <span style="color: var(--cinza-medio); font-weight: 400;">(opcional)</span></label>
+          </div>
+          <div class="pergunta-ajuda">Especialmente importante para condomínios horizontais ou ruas de difícil acesso.</div>
+          <input type="url" id="end_maps" name="end_maps" class="input" placeholder="https://maps.google.com/..." />
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 4 — TIPOLOGIA DO PONTO
+           ============================================================ -->
+      <div class="step" data-step="4">
+        <div class="step-numero">Seção 4 de 7</div>
+        <h1 class="step-titulo">Tipo do <span class="ornamento">imóvel</span></h1>
+        <p class="step-descricao">Esta é a seção mais importante. As respostas aqui definem se sua entrega é feita na madrugada ou no início da manhã.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">4.1</span>
+            <span class="pergunta-label">Qual o tipo de imóvel?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="apartamento" /><span class="indicador"></span><span class="opcao-texto">Apartamento</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="condominio_horizontal" /><span class="indicador"></span><span class="opcao-texto">Casa em condomínio horizontal fechado</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="casa" /><span class="indicador"></span><span class="opcao-texto">Casa fora de condomínio (rua aberta)</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="hotel" /><span class="indicador"></span><span class="opcao-texto">Hotel, pousada, flat ou apart-hotel</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="hospital" /><span class="indicador"></span><span class="opcao-texto">Hospital ou clínica</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="repouso" /><span class="indicador"></span><span class="opcao-texto">Casa de repouso ou residencial sênior</span></label>
+            <label class="opcao"><input type="radio" name="tipo_imovel" value="outro" /><span class="indicador"></span><span class="opcao-texto">Outro</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione o tipo do imóvel.</div>
+        </div>
+
+        <!-- ===== CONDICIONAL: APARTAMENTO ===== -->
+        <div class="condicional" data-condicional="tipo_imovel:apartamento">
+          <div class="divisor-secao">— Apartamento —</div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.2A</span>
+              <label class="pergunta-label" for="apto_nome_edificio">Nome do edifício / residencial<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="apto_nome_edificio" name="apto_nome_edificio" class="input" data-required-cond="apartamento" placeholder="Ex.: Edifício Manacás" />
+            <div class="mensagem-erro">Informe o nome do edifício.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.3A</span>
+              <span class="pergunta-label">Qual o tipo de portaria?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="pergunta-ajuda">Atenção: esta é a pergunta mais importante do formulário. Marque com cuidado — ela define se sua entrega é de madrugada ou de manhã.</div>
+            <div class="opcoes" data-required-radio-cond="apartamento">
+              <label class="opcao"><input type="radio" name="apto_portaria" value="fisica_24h" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria física 24h</strong>Tem porteiro presente fisicamente o tempo todo, inclusive de madrugada, e o prédio aceita receber encomendas no portão.</span></label>
+              <label class="opcao"><input type="radio" name="apto_portaria" value="eletronica_24h" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria eletrônica / remota 24h</strong>O portão é controlado por câmera ou intercomunicador a distância. <em>Não há porteiro físico para receber encomendas.</em></span></label>
+              <label class="opcao"><input type="radio" name="apto_portaria" value="parcial" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria física em horário parcial</strong>O porteiro só está presente em determinados horários do dia.</span></label>
+              <label class="opcao"><input type="radio" name="apto_portaria" value="sem" /><span class="indicador"></span><span class="opcao-texto"><strong>Sem portaria</strong>O prédio não tem porteiro nem portão controlado.</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione o tipo de portaria.</div>
+          </div>
+
+          <!-- Sub-condicional: portaria parcial → horário -->
+          <div class="condicional" data-condicional="apto_portaria:parcial">
+            <div class="pergunta">
+              <div class="pergunta-numero-label">
+                <span class="pergunta-numero">4.4A</span>
+                <label class="pergunta-label" for="apto_portaria_horario">Qual o horário do porteiro?<span class="obrigatoria">*</span></label>
+              </div>
+              <input type="text" id="apto_portaria_horario" name="apto_portaria_horario" class="input" data-required-cond="apto_portaria_parcial" placeholder="Ex.: das 06h às 22h" />
+              <div class="mensagem-erro">Informe o horário do porteiro.</div>
+            </div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.5A</span>
+              <label class="pergunta-label" for="apto_identificacao">Apartamento, bloco e torre<span class="obrigatoria">*</span></label>
+            </div>
+            <div class="pergunta-ajuda">Ex.: Apto 1204, Bloco B, Torre Norte.</div>
+            <input type="text" id="apto_identificacao" name="apto_identificacao" class="input" data-required-cond="apartamento" placeholder="Apto 1204, Bloco B" />
+            <div class="mensagem-erro">Informe a identificação completa.</div>
+          </div>
+
+          <!-- ALERTA + AVISO PORTEIRO (só portaria física 24h) -->
+          <div class="condicional" data-condicional="apto_portaria:fisica_24h">
+
+            <div class="bloco-alerta ativo">
+              <div class="bloco-alerta-titulo">
+                <span class="bloco-alerta-icon">!</span>
+                Atenção: ação obrigatória
+              </div>
+              <div class="bloco-alerta-corpo">
+                Sua entrega será feita na <strong>madrugada do domingo, entre 00h e 05h30</strong>. É indispensável que você avise o porteiro do seu prédio <strong>hoje mesmo</strong> que receberá uma cesta de café da manhã da Motche nesse horário, em nome da sua mãe (informe o nome dela). <strong>Sem esse aviso prévio, o porteiro pode recusar o recebimento e a entrega ficará comprometida — sem possibilidade de reembolso.</strong>
+              </div>
+            </div>
+
+            <div class="pergunta">
+              <div class="pergunta-numero-label">
+                <span class="pergunta-numero">4.6A</span>
+                <span class="pergunta-label">Você já avisou o porteiro sobre o recebimento da cesta?<span class="obrigatoria">*</span></span>
+              </div>
+              <div class="pergunta-ajuda">Esta confirmação é registrada e impacta diretamente o sucesso da entrega. Marque com sinceridade.</div>
+              <div class="opcoes" data-required-radio-cond="apto_portaria_fisica">
+                <label class="opcao"><input type="radio" name="apto_aviso_porteiro" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, já avisei o porteiro</span></label>
+                <label class="opcao"><input type="radio" name="apto_aviso_porteiro" value="ate_sabado" /><span class="indicador"></span><span class="opcao-texto">Ainda não, mas farei isso até sábado às 18h</span></label>
+                <label class="opcao"><input type="radio" name="apto_aviso_porteiro" value="nao_consigo" /><span class="indicador"></span><span class="opcao-texto">Não vou conseguir avisar (entendo que isso pode comprometer a entrega)</span></label>
+              </div>
+              <div class="mensagem-erro">Selecione uma opção.</div>
+            </div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.7A</span>
+              <span class="pergunta-label">O condomínio exige autorização prévia formal para entregas / cadastro de visitantes?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="apartamento">
+              <label class="opcao"><input type="radio" name="apto_cadastro" value="nao_exige" /><span class="indicador"></span><span class="opcao-texto">Não, basta o porteiro estar avisado</span></label>
+              <label class="opcao"><input type="radio" name="apto_cadastro" value="ja_fiz" /><span class="indicador"></span><span class="opcao-texto">Sim, e eu já fiz a autorização formal</span></label>
+              <label class="opcao"><input type="radio" name="apto_cadastro" value="vou_fazer" /><span class="indicador"></span><span class="opcao-texto">Sim, e ainda preciso fazer (vou providenciar até sábado)</span></label>
+              <label class="opcao"><input type="radio" name="apto_cadastro" value="nao_sei" /><span class="indicador"></span><span class="opcao-texto">Não sei — preciso verificar com o síndico/administradora</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.8A</span>
+              <span class="pergunta-label">O condomínio tem regra de horário para entregas?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="pergunta-ajuda">Ex.: "não recebe após 22h", "entregas só em horário comercial", etc.</div>
+            <div class="opcoes" data-required-radio-cond="apartamento">
+              <label class="opcao"><input type="radio" name="apto_horario_regra" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não, recebe a qualquer hora</span></label>
+              <label class="opcao"><input type="radio" name="apto_horario_regra" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, há restrição</span></label>
+              <label class="opcao"><input type="radio" name="apto_horario_regra" value="nao_sei" /><span class="indicador"></span><span class="opcao-texto">Não sei</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="condicional" data-condicional="apto_horario_regra:sim">
+            <div class="pergunta">
+              <div class="pergunta-numero-label">
+                <span class="pergunta-numero">4.8A.1</span>
+                <label class="pergunta-label" for="apto_horario_regra_qual">Qual a restrição?<span class="obrigatoria">*</span></label>
+              </div>
+              <input type="text" id="apto_horario_regra_qual" name="apto_horario_regra_qual" class="input" data-required-cond="apto_horario_regra_sim" placeholder="Ex.: Não recebe após 22h" />
+              <div class="mensagem-erro">Descreva a restrição.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== CONDICIONAL: CONDOMÍNIO HORIZONTAL ===== -->
+        <div class="condicional" data-condicional="tipo_imovel:condominio_horizontal">
+          <div class="divisor-secao">— Condomínio Horizontal —</div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.2B</span>
+              <label class="pergunta-label" for="cond_nome">Nome do condomínio<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="cond_nome" name="cond_nome" class="input" data-required-cond="condominio_horizontal" placeholder="Ex.: Condomínio Solar das Acácias" />
+            <div class="mensagem-erro">Informe o nome do condomínio.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.3B</span>
+              <span class="pergunta-label">Como é a portaria de acesso ao condomínio?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="condominio_horizontal">
+              <label class="opcao"><input type="radio" name="cond_portaria" value="fisica_24h" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria física 24h</strong>Porteiro presente fisicamente o tempo todo, inclusive de madrugada.</span></label>
+              <label class="opcao"><input type="radio" name="cond_portaria" value="eletronica_24h" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria eletrônica 24h</strong>Sem porteiro físico, controle remoto via câmera/intercomunicador.</span></label>
+              <label class="opcao"><input type="radio" name="cond_portaria" value="parcial" /><span class="indicador"></span><span class="opcao-texto"><strong>Portaria física em horário parcial</strong>Porteiro presente apenas em determinados horários.</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione o tipo de portaria.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.4B</span>
+              <span class="pergunta-label">O condomínio exige cadastro prévio de prestadores/entregadores?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="pergunta-ajuda">Geralmente exigem nome, CPF e às vezes a placa do veículo do entregador.</div>
+            <div class="opcoes" data-required-radio-cond="condominio_horizontal">
+              <label class="opcao"><input type="radio" name="cond_cadastro" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não exige</span></label>
+              <label class="opcao"><input type="radio" name="cond_cadastro" value="ja_fiz" /><span class="indicador"></span><span class="opcao-texto">Sim, e eu já fiz</span></label>
+              <label class="opcao"><input type="radio" name="cond_cadastro" value="vou_fazer" /><span class="indicador"></span><span class="opcao-texto">Sim, e ainda preciso fazer (vou providenciar até sábado)</span></label>
+              <label class="opcao"><input type="radio" name="cond_cadastro" value="nao_sei" /><span class="indicador"></span><span class="opcao-texto">Não sei</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.5B</span>
+              <span class="pergunta-label">Após entrar no condomínio, qual o protocolo até a casa?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="condominio_horizontal">
+              <label class="opcao"><input type="radio" name="cond_protocolo" value="portaria_recebe" /><span class="indicador"></span><span class="opcao-texto">A portaria recebe a cesta na guarita e eu busco depois</span></label>
+              <label class="opcao"><input type="radio" name="cond_protocolo" value="portaria_autoriza" /><span class="indicador"></span><span class="opcao-texto">A portaria autoriza o entregador a seguir até a casa</span></label>
+              <label class="opcao"><input type="radio" name="cond_protocolo" value="autorizo_intercom" /><span class="indicador"></span><span class="opcao-texto">É preciso que eu autorize na hora pelo intercomunicador</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <!-- ALERTA + AVISO PORTEIRO (só portaria física 24h em cond. horizontal) -->
+          <div class="condicional" data-condicional="cond_portaria:fisica_24h">
+
+            <div class="bloco-alerta ativo">
+              <div class="bloco-alerta-titulo">
+                <span class="bloco-alerta-icon">!</span>
+                Atenção: ação obrigatória
+              </div>
+              <div class="bloco-alerta-corpo">
+                Sua entrega será feita na <strong>madrugada do domingo, entre 00h e 05h30</strong>. É indispensável que você (1) avise o porteiro do seu condomínio <strong>hoje mesmo</strong> que receberá uma cesta da Motche nesse horário e (2) verifique se o condomínio exige cadastro prévio formal do entregador. <strong>Sem essas providências, o entregador pode ser barrado na portaria — sem possibilidade de reembolso.</strong>
+              </div>
+            </div>
+
+            <div class="pergunta">
+              <div class="pergunta-numero-label">
+                <span class="pergunta-numero">4.6B</span>
+                <span class="pergunta-label">Você já avisou o porteiro do condomínio?<span class="obrigatoria">*</span></span>
+              </div>
+              <div class="opcoes" data-required-radio-cond="cond_portaria_fisica">
+                <label class="opcao"><input type="radio" name="cond_aviso_porteiro" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, já avisei</span></label>
+                <label class="opcao"><input type="radio" name="cond_aviso_porteiro" value="ate_sabado" /><span class="indicador"></span><span class="opcao-texto">Ainda não, mas farei isso até sábado às 18h</span></label>
+                <label class="opcao"><input type="radio" name="cond_aviso_porteiro" value="nao_consigo" /><span class="indicador"></span><span class="opcao-texto">Não vou conseguir avisar (entendo que isso pode comprometer a entrega)</span></label>
+              </div>
+              <div class="mensagem-erro">Selecione uma opção.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== CONDICIONAL: CASA FORA DE CONDOMÍNIO ===== -->
+        <div class="condicional" data-condicional="tipo_imovel:casa">
+          <div class="divisor-secao">— Casa —</div>
+
+          <div class="bloco-info ativo">
+            <div class="bloco-info-titulo">Janela de entrega: início da manhã</div>
+            <div class="bloco-info-corpo">
+              Casas fora de condomínio entram automaticamente na janela de <strong>05h30 a 09h00</strong>, pois não há quem receba durante a madrugada.
+            </div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.2C</span>
+              <span class="pergunta-label">Como é o acesso da rua até a porta da casa?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="casa">
+              <label class="opcao"><input type="radio" name="casa_acesso" value="campainha" /><span class="indicador"></span><span class="opcao-texto">Muro/portão com campainha funcional</span></label>
+              <label class="opcao"><input type="radio" name="casa_acesso" value="interfone" /><span class="indicador"></span><span class="opcao-texto">Muro/portão com interfone</span></label>
+              <label class="opcao"><input type="radio" name="casa_acesso" value="sem_campainha" /><span class="indicador"></span><span class="opcao-texto">Muro/portão sem campainha (precisa bater palma ou ligar)</span></label>
+              <label class="opcao"><input type="radio" name="casa_acesso" value="cadeado" /><span class="indicador"></span><span class="opcao-texto">Muro/portão com cadeado (preciso abrir pessoalmente)</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.3C</span>
+              <span class="pergunta-label">Há cachorro solto no quintal ou área externa?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="casa">
+              <label class="opcao"><input type="radio" name="casa_cachorro" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não</span></label>
+              <label class="opcao"><input type="radio" name="casa_cachorro" value="docil" /><span class="indicador"></span><span class="opcao-texto">Sim, mas é dócil</span></label>
+              <label class="opcao"><input type="radio" name="casa_cachorro" value="bravo" /><span class="indicador"></span><span class="opcao-texto">Sim, e late ou avança em estranhos</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.4C</span>
+              <span class="pergunta-label">Alguém estará acordado para receber entre 05h30 e 09h00?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="casa">
+              <label class="opcao"><input type="radio" name="casa_recepcao" value="esperando" /><span class="indicador"></span><span class="opcao-texto">Sim, alguém ficará esperando</span></label>
+              <label class="opcao"><input type="radio" name="casa_recepcao" value="autorizo_porta" /><span class="indicador"></span><span class="opcao-texto">Não, mas autorizo deixar do lado de dentro do portão com foto-comprovante</span></label>
+              <label class="opcao"><input type="radio" name="casa_recepcao" value="apos_07h" /><span class="indicador"></span><span class="opcao-texto">Não, prefiro entregar a partir das 07h</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+        </div>
+
+        <!-- ===== CONDICIONAL: HOTEL / HOSPITAL / CASA DE REPOUSO ===== -->
+        <div class="condicional" data-condicional-multi="tipo_imovel:hotel,hospital,repouso">
+          <div class="divisor-secao">— Estabelecimento —</div>
+
+          <div class="bloco-info ativo">
+            <div class="bloco-info-titulo">Janela ajustada</div>
+            <div class="bloco-info-corpo">
+              Entregas em hotéis, hospitais e casas de repouso são feitas <strong>no início da manhã</strong>, com horário ajustado conforme a política do estabelecimento.
+            </div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.2D</span>
+              <label class="pergunta-label" for="estab_nome">Nome do estabelecimento<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="estab_nome" name="estab_nome" class="input" data-required-cond="estabelecimento" placeholder="Ex.: Hospital Real Português, Hotel Atlante Plaza" />
+            <div class="mensagem-erro">Informe o nome do estabelecimento.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.3D</span>
+              <label class="pergunta-label" for="estab_unidade">Número do quarto / apartamento / unidade<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="estab_unidade" name="estab_unidade" class="input" data-required-cond="estabelecimento" placeholder="Ex.: Quarto 305, Apto 12" />
+            <div class="mensagem-erro">Informe a identificação da unidade.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.4D</span>
+              <span class="pergunta-label">A recepção atende 24h e aceita receber a entrega?<span class="obrigatoria">*</span></span>
+            </div>
+            <div class="opcoes" data-required-radio-cond="estabelecimento">
+              <label class="opcao"><input type="radio" name="estab_recepcao" value="24h_aceita" /><span class="indicador"></span><span class="opcao-texto">Sim, atende 24h e aceita</span></label>
+              <label class="opcao"><input type="radio" name="estab_recepcao" value="24h_restrito" /><span class="indicador"></span><span class="opcao-texto">Atende 24h mas tem horário restrito para encomendas</span></label>
+              <label class="opcao"><input type="radio" name="estab_recepcao" value="nao_24h" /><span class="indicador"></span><span class="opcao-texto">Não atende 24h</span></label>
+              <label class="opcao"><input type="radio" name="estab_recepcao" value="nao_sei" /><span class="indicador"></span><span class="opcao-texto">Não sei — entrarei em contato para confirmar</span></label>
+            </div>
+            <div class="mensagem-erro">Selecione uma opção.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">4.5D</span>
+              <label class="pergunta-label" for="estab_restricoes">Há alguma restrição de visita ou orientação especial?<span style="color: var(--cinza-medio); font-weight: 400;"> (opcional)</span></label>
+            </div>
+            <div class="pergunta-ajuda">Ex.: enfermaria só recebe das 08h em diante, hotel exige documento, residencial sênior tem horário de visitas, etc.</div>
+            <textarea id="estab_restricoes" name="estab_restricoes" class="textarea" placeholder="Detalhes sobre restrições..."></textarea>
+          </div>
+        </div>
+
+        <!-- INDICADOR DE JANELA (calculado dinamicamente) -->
+        <div class="indicador-janela" id="indicador-janela">
+          <div class="indicador-janela-icon" id="indicador-janela-emoji">★</div>
+          <div class="indicador-janela-texto">
+            <div class="indicador-janela-titulo">Janela de entrega definida</div>
+            <div class="indicador-janela-descricao" id="indicador-janela-descricao"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 5 — PROTOCOLO DE RECEBIMENTO
+           ============================================================ -->
+      <div class="step" data-step="5">
+        <div class="step-numero">Seção 5 de 7</div>
+        <h1 class="step-titulo">Protocolo de <span class="ornamento">recebimento</span></h1>
+        <p class="step-descricao">Quem está autorizado a receber a cesta e como o entregador deve abordar o local.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">5.1</span>
+            <span class="pergunta-label">Quem está autorizado a receber a cesta?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Em prédios com portaria 24h o padrão é entregar ao porteiro. Esta pergunta define alternativas em caso de exceção.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="rec_autorizado" value="porteiro" /><span class="indicador"></span><span class="opcao-texto">Porteiro / recepção do prédio (padrão para prédios com portaria 24h)</span></label>
+            <label class="opcao"><input type="radio" name="rec_autorizado" value="homenageada" /><span class="indicador"></span><span class="opcao-texto">A própria homenageada</span></label>
+            <label class="opcao"><input type="radio" name="rec_autorizado" value="qualquer_familiar" /><span class="indicador"></span><span class="opcao-texto">Qualquer pessoa do endereço (familiar, cônjuge, filho)</span></label>
+            <label class="opcao"><input type="radio" name="rec_autorizado" value="vizinho" /><span class="indicador"></span><span class="opcao-texto">Vizinho de confiança</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="condicional" data-condicional="rec_autorizado:vizinho">
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">5.1.1</span>
+              <label class="pergunta-label" for="rec_vizinho">Qual vizinho?<span class="obrigatoria">*</span></label>
+            </div>
+            <div class="pergunta-ajuda">Informe nome e número do apto/casa.</div>
+            <input type="text" id="rec_vizinho" name="rec_vizinho" class="input" data-required-cond="vizinho" placeholder="Ex.: Maria — Apto 1203" />
+            <div class="mensagem-erro">Informe os dados do vizinho.</div>
+          </div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">5.2</span>
+            <span class="pergunta-label">Pode tocar a campainha / interfone na entrega?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Para prédios com porteiro 24h não se aplica — a entrega é direta ao porteiro.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="rec_campainha" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, pode tocar normalmente</span></label>
+            <label class="opcao"><input type="radio" name="rec_campainha" value="apenas_apos" /><span class="indicador"></span><span class="opcao-texto">Sim, mas apenas a partir de um horário específico</span></label>
+            <label class="opcao"><input type="radio" name="rec_campainha" value="nao_silencio" /><span class="indicador"></span><span class="opcao-texto">Não — entregar em silêncio (combinar abertura por outro meio)</span></label>
+            <label class="opcao"><input type="radio" name="rec_campainha" value="nao_aplica" /><span class="indicador"></span><span class="opcao-texto">Não se aplica (entrega ao porteiro)</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="condicional" data-condicional="rec_campainha:apenas_apos">
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">5.2.1</span>
+              <label class="pergunta-label" for="rec_campainha_horario">A partir de qual horário pode tocar?<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="rec_campainha_horario" name="rec_campainha_horario" class="input" data-required-cond="campainha_apos" placeholder="Ex.: a partir das 06h30" />
+            <div class="mensagem-erro">Informe o horário.</div>
+          </div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">5.3</span>
+            <span class="pergunta-label">Há horário em que NÃO podemos entregar?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Ex.: a mãe vai à missa às 07h, vai sair de casa às 08h. Aplicável principalmente a entregas no início da manhã.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="rec_horario_proibido" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não, pode entregar em qualquer horário da janela</span></label>
+            <label class="opcao"><input type="radio" name="rec_horario_proibido" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, há restrição</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="condicional" data-condicional="rec_horario_proibido:sim">
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">5.3.1</span>
+              <label class="pergunta-label" for="rec_horario_proibido_qual">Qual a restrição?<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="rec_horario_proibido_qual" name="rec_horario_proibido_qual" class="input" data-required-cond="horario_proibido" placeholder="Ex.: Não entregar entre 06h45 e 08h, ela estará na missa" />
+            <div class="mensagem-erro">Descreva a restrição.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 6 — PERSONALIZAÇÃO
+           ============================================================ -->
+      <div class="step" data-step="6">
+        <div class="step-numero">Seção 6 de 7</div>
+        <h1 class="step-titulo">Toques <span class="ornamento">finais</span></h1>
+        <p class="step-descricao">Bilhete personalizado, mensagem e detalhes específicos da cesta.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">6.1</span>
+            <span class="pergunta-label">Deseja incluir um bilhete personalizado?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="bilhete_quer" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim</span></label>
+            <label class="opcao"><input type="radio" name="bilhete_quer" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="condicional" data-condicional="bilhete_quer:sim">
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">6.2</span>
+              <label class="pergunta-label" for="bilhete_mensagem">Mensagem do bilhete<span class="obrigatoria">*</span></label>
+            </div>
+            <div class="pergunta-ajuda">Até 250 caracteres.</div>
+            <textarea id="bilhete_mensagem" name="bilhete_mensagem" class="textarea" data-required-cond="bilhete" maxlength="250" placeholder="Mainha, obrigado por tudo. Você é a luz da nossa casa."></textarea>
+            <div class="mensagem-erro">Escreva sua mensagem.</div>
+          </div>
+
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">6.3</span>
+              <label class="pergunta-label" for="bilhete_assinatura">Quem assina o bilhete?<span class="obrigatoria">*</span></label>
+            </div>
+            <div class="pergunta-ajuda">Ex.: "Seu filho João", "Maria, Pedro e família".</div>
+            <input type="text" id="bilhete_assinatura" name="bilhete_assinatura" class="input" data-required-cond="bilhete" placeholder="Assinatura do bilhete" />
+            <div class="mensagem-erro">Informe a assinatura.</div>
+          </div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">6.4</span>
+            <span class="pergunta-label">Restrições alimentares ou alergias?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Importante para revisarmos a composição da cesta antes da entrega.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="restricao_alimentar" value="nao" /><span class="indicador"></span><span class="opcao-texto">Não tem restrições</span></label>
+            <label class="opcao"><input type="radio" name="restricao_alimentar" value="sim" /><span class="indicador"></span><span class="opcao-texto">Sim, há restrição</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="condicional" data-condicional="restricao_alimentar:sim">
+          <div class="pergunta">
+            <div class="pergunta-numero-label">
+              <span class="pergunta-numero">6.4.1</span>
+              <label class="pergunta-label" for="restricao_alimentar_qual">Qual a restrição?<span class="obrigatoria">*</span></label>
+            </div>
+            <input type="text" id="restricao_alimentar_qual" name="restricao_alimentar_qual" class="input" data-required-cond="restricao_alimentar" placeholder="Ex.: Intolerância à lactose, alergia a frutos do mar" />
+            <div class="mensagem-erro">Descreva a restrição.</div>
+          </div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">6.5</span>
+            <label class="pergunta-label" for="observacoes">Outras observações <span style="color: var(--cinza-medio); font-weight: 400;">(opcional)</span></label>
+          </div>
+          <div class="pergunta-ajuda">Qualquer detalhe importante sobre a entrega ou a cesta.</div>
+          <textarea id="observacoes" name="observacoes" class="textarea" placeholder="Observações livres..."></textarea>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           STEP 7 — TERMO DE CIÊNCIA
+           ============================================================ -->
+      <div class="step" data-step="7">
+        <div class="step-numero">Seção 7 de 7 — Última etapa</div>
+        <h1 class="step-titulo">Termo de <span class="ornamento">ciência</span></h1>
+        <p class="step-descricao">Antes de finalizar, precisamos garantir que você está alinhado com as regras da nossa operação. Marque cada item para confirmar.</p>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">7.1</span>
+            <span class="pergunta-label">Em caso de tentativa frustrada de entrega, qual sua preferência?<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">É realizada apenas 1 nova tentativa após sua confirmação, OU você pode optar pela retirada na loja.</div>
+          <div class="opcoes" data-required-radio>
+            <label class="opcao"><input type="radio" name="plano_b" value="nova_tentativa" /><span class="indicador"></span><span class="opcao-texto">Realizar 1 nova tentativa de entrega no mesmo dia, em horário a combinar via WhatsApp</span></label>
+            <label class="opcao"><input type="radio" name="plano_b" value="retirada_loja" /><span class="indicador"></span><span class="opcao-texto">Eu mesmo retiro a cesta diretamente na loja Motche</span></label>
+            <label class="opcao"><input type="radio" name="plano_b" value="decido_hora" /><span class="indicador"></span><span class="opcao-texto">Decido na hora, após receber a notificação da tentativa frustrada</span></label>
+          </div>
+          <div class="mensagem-erro">Selecione uma opção.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">7.2</span>
+            <span class="pergunta-label">Confirmação das janelas de entrega<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Marque cada item para confirmar.</div>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="termo_janelas_madrugada" data-required-check /><span class="indicador"></span><span class="opcao-texto">Entendo que entregas em endereços com portaria física 24h ocorrem entre 00h e 05h30 (Janela Madrugada) e que essa é a regra da operação</span></label>
+            <label class="opcao"><input type="checkbox" name="termo_janelas_manha" data-required-check /><span class="indicador"></span><span class="opcao-texto">Entendo que entregas em casas, prédios sem porteiro 24h, portarias eletrônicas/remotas e portarias com horário parcial ocorrem entre 05h30 e 09h00 (Janela Manhã)</span></label>
+            <label class="opcao"><input type="checkbox" name="termo_janelas_motche_define" data-required-check /><span class="indicador"></span><span class="opcao-texto">Entendo que a Motche define a janela exata de cada entrega com base nas informações que forneci, e que eu não escolho a janela</span></label>
+          </div>
+          <div class="mensagem-erro">Marque todos os itens para continuar.</div>
+        </div>
+
+        <div class="pergunta condicional" data-condicional-multi="apto_portaria:fisica_24h|cond_portaria:fisica_24h">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">7.3</span>
+            <span class="pergunta-label">Confirmação da responsabilidade de aviso ao porteiro<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="pergunta-ajuda">Aplicável porque você marcou portaria física 24h.</div>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="termo_aviso_responsabilidade" data-required-check-cond="aviso_porteiro" /><span class="indicador"></span><span class="opcao-texto">Confirmo que é minha responsabilidade avisar o porteiro previamente sobre a entrega, e que farei isso até sábado às 18h</span></label>
+            <label class="opcao"><input type="checkbox" name="termo_aviso_falha" data-required-check-cond="aviso_porteiro" /><span class="indicador"></span><span class="opcao-texto">Confirmo que, se o porteiro recusar o recebimento por falta de aviso prévio, a falha de entrega é de minha responsabilidade</span></label>
+          </div>
+          <div class="mensagem-erro">Marque ambos os itens para continuar.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">7.4</span>
+            <span class="pergunta-label">Política de tentativas e ausência de reembolso<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="termo_pol_tentativa_unica" data-required-check /><span class="indicador"></span><span class="opcao-texto">Entendo que é realizada apenas 1 tentativa de entrega na janela classificada</span></label>
+            <label class="opcao"><input type="checkbox" name="termo_pol_segunda" data-required-check /><span class="indicador"></span><span class="opcao-texto">Entendo que, em caso de falha, é realizada no máximo 1 nova tentativa após minha confirmação, OU posso retirar a cesta na loja</span></label>
+            <label class="opcao"><input type="checkbox" name="termo_pol_sem_reembolso" data-required-check /><span class="indicador"></span><span class="opcao-texto"><strong>Entendo que NÃO há possibilidade de reembolso, cancelamento ou desistência</strong>quando a falha de entrega não é causada pela Motche (porteiro não avisado, endereço incorreto, cadastro pendente em condomínio, ninguém em casa)</span></label>
+          </div>
+          <div class="mensagem-erro">Marque todos os itens para continuar.</div>
+        </div>
+
+        <div class="pergunta">
+          <div class="pergunta-numero-label">
+            <span class="pergunta-numero">7.5</span>
+            <span class="pergunta-label">Confirmação de dados<span class="obrigatoria">*</span></span>
+          </div>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="termo_dados" data-required-check /><span class="indicador"></span><span class="opcao-texto">Confirmo que todas as informações deste formulário estão corretas e que sou responsável por qualquer falha de entrega causada por dados incorretos ou incompletos</span></label>
+          </div>
+          <div class="mensagem-erro">Marque o item para continuar.</div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           AÇÕES
+           ============================================================ -->
+      <div class="acoes" id="acoes">
+        <button type="button" class="btn btn-secundario invisible" id="btn-voltar">← Voltar</button>
+        <button type="button" class="btn btn-primario" id="btn-proximo">Começar →</button>
+      </div>
+
+      <!-- ============================================================
+           SUCESSO
+           ============================================================ -->
+      <div class="sucesso" id="sucesso">
+        <div class="sucesso-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h1 class="sucesso-titulo">Tudo <em>pronto</em>!</h1>
+        <p class="sucesso-descricao">
+          Recebemos suas informações. Nossa equipe vai validar tudo e entrar em contato pelo WhatsApp se houver qualquer dúvida. No domingo, sua mãe vai acordar com a cesta esperando por ela.
+        </p>
+        <div class="sucesso-resumo" id="sucesso-resumo"></div>
+
+        <p style="margin-top: 32px; font-family: var(--fonte-display); font-style: italic; font-size: 18px; color: var(--dourado-escuro);">
+          — Equipe Motche
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-marca">Motche</span>
+  Padaria Artesanal · Recife / PE<br>
+  © 2026 Motche · Operação Madrugada — Dia das Mães
+</footer>
+
+<div class="autosave" id="autosave">Salvo automaticamente</div>
+
+<script>
+/* =================================================================
+   CONFIGURAÇÃO
+   ================================================================= */
+
+const CONFIG = {
+  // ⚠️ SUBSTITUIR pela URL do webhook que receberá os dados.
+  // Opções recomendadas:
+  //   1) Google Apps Script publicado como Web App → grava direto numa Sheet
+  //   2) Tally.so usando a API de webhook deles
+  //   3) Backend próprio (Node, Python, etc.)
+  //   4) n8n ou Make (Integromat) com webhook
+  //
+  // Se ficar vazio, o formulário grava no localStorage e exibe os dados
+  // formatados em JSON ao final, para você copiar manualmente.
+  //
+  // Documento técnico no final do arquivo explica como configurar.
+  WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbzc1rY1HlgHowQgHfRbV-nwo-R2-ISzgIBzExyFBgw2OEOp5phC3AY3lXDignSDND9d/exec',
+
+  // Storage key do autosave
+  STORAGE_KEY: 'motche_form_dia_das_maes_v1',
+
+  // Total de etapas (excluindo intro = 0)
+  TOTAL_STEPS: 7
+};
+
+/* =================================================================
+   ESTADO
+   ================================================================= */
+
+let stepAtual = 0;
+const form = document.getElementById('form-motche');
+const btnVoltar = document.getElementById('btn-voltar');
+const btnProximo = document.getElementById('btn-proximo');
+const progressoFill = document.getElementById('progresso-fill');
+const progressoStepLabel = document.getElementById('progresso-step-label');
+const progressoPercent = document.getElementById('progresso-percent');
+const progressoContainer = document.getElementById('progresso-container');
+const acoes = document.getElementById('acoes');
+const sucesso = document.getElementById('sucesso');
+const autosaveEl = document.getElementById('autosave');
+
+/* =================================================================
+   MÁSCARAS
+   ================================================================= */
+
+function aplicarMascara(input, tipo) {
+  let v = input.value.replace(/\D/g, '');
+
+  if (tipo === 'cpf') {
+    v = v.slice(0, 11);
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  } else if (tipo === 'telefone') {
+    v = v.slice(0, 11);
+    if (v.length > 2) v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+    if (v.length > 10) v = v.slice(0, 10) + '-' + v.slice(10);
+    else if (v.length > 9) v = v.slice(0, 9) + '-' + v.slice(9);
+  } else if (tipo === 'cep') {
+    v = v.slice(0, 8);
+    if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5);
+  }
+
+  input.value = v;
+}
+
+document.querySelectorAll('[data-mask]').forEach(input => {
+  const tipo = input.dataset.mask;
+  input.addEventListener('input', () => aplicarMascara(input, tipo));
+});
+
+/* =================================================================
+   VALIDAÇÕES
+   ================================================================= */
+
+function validarEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g, '');
+  if (cpf.length !== 11) return false;
+  if (/^(\d)\1{10}$/.test(cpf)) return false;
+  let soma = 0, resto;
+  for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.substring(9, 10))) return false;
+  soma = 0;
+  for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  return resto === parseInt(cpf.substring(10, 11));
+}
+
+function validarTelefone(tel) {
+  const v = tel.replace(/\D/g, '');
+  return v.length === 10 || v.length === 11;
+}
+
+function validarCEP(cep) {
+  return cep.replace(/\D/g, '').length === 8;
+}
+
+function mostrarErro(elemento, msg) {
+  const pergunta = elemento.closest('.pergunta');
+  const erro = pergunta.querySelector('.mensagem-erro');
+  if (msg) erro.textContent = msg;
+  erro.classList.add('ativo');
+
+  if (elemento.classList.contains('opcoes')) {
+    elemento.classList.add('opcoes-erro');
+  } else {
+    elemento.classList.add('input-erro');
+  }
+}
+
+function limparErro(elemento) {
+  const pergunta = elemento.closest('.pergunta');
+  if (!pergunta) return;
+  const erro = pergunta.querySelector('.mensagem-erro');
+  if (erro) erro.classList.remove('ativo');
+
+  pergunta.querySelectorAll('.input-erro, .opcoes-erro').forEach(el => {
+    el.classList.remove('input-erro');
+    el.classList.remove('opcoes-erro');
+  });
+}
+
+// Limpa erros ao interagir
+form.addEventListener('input', e => limparErro(e.target));
+form.addEventListener('change', e => limparErro(e.target));
+
+/* =================================================================
+   LÓGICA CONDICIONAL
+   ================================================================= */
+
+function atualizarCondicionais() {
+  // Condicionais simples (data-condicional="campo:valor")
+  document.querySelectorAll('[data-condicional]').forEach(bloco => {
+    const [campo, valor] = bloco.dataset.condicional.split(':');
+    const inputs = document.querySelectorAll(`[name="${campo}"]`);
+    let valorAtual = '';
+    inputs.forEach(i => { if (i.checked) valorAtual = i.value; });
+    bloco.classList.toggle('ativo', valorAtual === valor);
+  });
+
+  // Condicionais multi (data-condicional-multi="campo:val1,val2,val3" ou "campo1:v1|campo2:v2")
+  document.querySelectorAll('[data-condicional-multi]').forEach(bloco => {
+    const regra = bloco.dataset.condicionalMulti;
+
+    // Múltiplos campos com OR (separados por |)
+    if (regra.includes('|')) {
+      const grupos = regra.split('|');
+      let match = false;
+      for (const grupo of grupos) {
+        const [campo, valor] = grupo.split(':');
+        const inputs = document.querySelectorAll(`[name="${campo}"]`);
+        inputs.forEach(i => { if (i.checked && i.value === valor) match = true; });
+      }
+      bloco.classList.toggle('ativo', match);
+    } else {
+      // Um campo, múltiplos valores aceitos
+      const [campo, valoresStr] = regra.split(':');
+      const valores = valoresStr.split(',');
+      const inputs = document.querySelectorAll(`[name="${campo}"]`);
+      let valorAtual = '';
+      inputs.forEach(i => { if (i.checked) valorAtual = i.value; });
+      bloco.classList.toggle('ativo', valores.includes(valorAtual));
+    }
+  });
+
+  atualizarIndicadorJanela();
+}
+
+form.addEventListener('change', atualizarCondicionais);
+
+/* =================================================================
+   INDICADOR DE JANELA
+   ================================================================= */
+
+function calcularJanela() {
+  const tipoImovel = document.querySelector('[name="tipo_imovel"]:checked')?.value;
+  if (!tipoImovel) return null;
+
+  if (tipoImovel === 'apartamento') {
+    const portaria = document.querySelector('[name="apto_portaria"]:checked')?.value;
+    if (!portaria) return null;
+    if (portaria === 'fisica_24h') return { janela: 'madrugada', horario: '00h00 — 05h30', label: 'Janela Madrugada' };
+    return { janela: 'manha', horario: '05h30 — 09h00', label: 'Janela Manhã' };
+  }
+
+  if (tipoImovel === 'condominio_horizontal') {
+    const portaria = document.querySelector('[name="cond_portaria"]:checked')?.value;
+    if (!portaria) return null;
+    if (portaria === 'fisica_24h') return { janela: 'madrugada', horario: '00h00 — 05h30', label: 'Janela Madrugada' };
+    return { janela: 'manha', horario: '05h30 — 09h00', label: 'Janela Manhã' };
+  }
+
+  // casa, hotel, hospital, repouso, outro → manhã
+  return { janela: 'manha', horario: '05h30 — 09h00', label: 'Janela Manhã' };
+}
+
+function atualizarIndicadorJanela() {
+  const indicador = document.getElementById('indicador-janela');
+  const descricao = document.getElementById('indicador-janela-descricao');
+  const emoji = document.getElementById('indicador-janela-emoji');
+  const resultado = calcularJanela();
+
+  if (!resultado) {
+    indicador.classList.remove('ativo');
+    return;
+  }
+
+  // Só mostra na step 4
+  if (stepAtual !== 4) {
+    indicador.classList.remove('ativo');
+    return;
+  }
+
+  indicador.classList.add('ativo');
+  emoji.textContent = resultado.janela === 'madrugada' ? '◐' : '◑';
+  descricao.innerHTML = `<strong>${resultado.horario}</strong> ${resultado.label} — definida automaticamente pelas suas respostas`;
+}
+
+/* =================================================================
+   VALIDAÇÃO POR STEP
+   ================================================================= */
+
+function validarStep(step) {
+  if (step === 0) return true;
+
+  const stepEl = document.querySelector(`.step[data-step="${step}"]`);
+  let valido = true;
+  let primeiroErro = null;
+
+  // Inputs obrigatórios sempre
+  stepEl.querySelectorAll('[data-required]').forEach(input => {
+    if (!isVisivel(input)) return;
+    const v = input.value.trim();
+    if (!v) {
+      mostrarErro(input);
+      if (!primeiroErro) primeiroErro = input;
+      valido = false;
+    } else {
+      // Validações de tipo
+      if (input.type === 'email' && !validarEmail(v)) {
+        mostrarErro(input);
+        if (!primeiroErro) primeiroErro = input;
+        valido = false;
+      }
+      if (input.dataset.mask === 'cpf' && !validarCPF(v)) {
+        mostrarErro(input);
+        if (!primeiroErro) primeiroErro = input;
+        valido = false;
+      }
+      if (input.dataset.mask === 'telefone' && !validarTelefone(v)) {
+        mostrarErro(input);
+        if (!primeiroErro) primeiroErro = input;
+        valido = false;
+      }
+      if (input.dataset.mask === 'cep' && !validarCEP(v)) {
+        mostrarErro(input);
+        if (!primeiroErro) primeiroErro = input;
+        valido = false;
+      }
+    }
+  });
+
+  // Inputs obrigatórios condicionais
+  stepEl.querySelectorAll('[data-required-cond]').forEach(input => {
+    if (!isVisivel(input)) return;
+    const v = input.value.trim();
+    if (!v) {
+      mostrarErro(input);
+      if (!primeiroErro) primeiroErro = input;
+      valido = false;
+    }
+  });
+
+  // Radio groups obrigatórios sempre
+  stepEl.querySelectorAll('[data-required-radio]').forEach(grupo => {
+    if (!isVisivel(grupo)) return;
+    const inputs = grupo.querySelectorAll('input[type="radio"]');
+    const algumMarcado = Array.from(inputs).some(i => i.checked);
+    if (!algumMarcado) {
+      mostrarErro(grupo);
+      if (!primeiroErro) primeiroErro = grupo;
+      valido = false;
+    }
+  });
+
+  // Radio groups obrigatórios condicionais
+  stepEl.querySelectorAll('[data-required-radio-cond]').forEach(grupo => {
+    if (!isVisivel(grupo)) return;
+    const inputs = grupo.querySelectorAll('input[type="radio"]');
+    const algumMarcado = Array.from(inputs).some(i => i.checked);
+    if (!algumMarcado) {
+      mostrarErro(grupo);
+      if (!primeiroErro) primeiroErro = grupo;
+      valido = false;
+    }
+  });
+
+  // Checkboxes obrigatórios sempre (cada um deve estar marcado)
+  // Agrupa pela mensagem-erro mais próxima
+  const checksObrig = stepEl.querySelectorAll('[data-required-check]');
+  const gruposCheck = new Map();
+  checksObrig.forEach(c => {
+    if (!isVisivel(c)) return;
+    const pergunta = c.closest('.pergunta');
+    if (!gruposCheck.has(pergunta)) gruposCheck.set(pergunta, []);
+    gruposCheck.get(pergunta).push(c);
+  });
+  gruposCheck.forEach((checks, pergunta) => {
+    const todosMarcados = checks.every(c => c.checked);
+    if (!todosMarcados) {
+      const opcoes = pergunta.querySelector('.opcoes');
+      mostrarErro(opcoes);
+      if (!primeiroErro) primeiroErro = opcoes;
+      valido = false;
+    }
+  });
+
+  // Checkboxes obrigatórios condicionais
+  const checksObrigCond = stepEl.querySelectorAll('[data-required-check-cond]');
+  const gruposCheckCond = new Map();
+  checksObrigCond.forEach(c => {
+    if (!isVisivel(c)) return;
+    const pergunta = c.closest('.pergunta');
+    if (!gruposCheckCond.has(pergunta)) gruposCheckCond.set(pergunta, []);
+    gruposCheckCond.get(pergunta).push(c);
+  });
+  gruposCheckCond.forEach((checks, pergunta) => {
+    const todosMarcados = checks.every(c => c.checked);
+    if (!todosMarcados) {
+      const opcoes = pergunta.querySelector('.opcoes');
+      mostrarErro(opcoes);
+      if (!primeiroErro) primeiroErro = opcoes;
+      valido = false;
+    }
+  });
+
+  if (primeiroErro) {
+    primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  return valido;
+}
+
+function isVisivel(elemento) {
+  let el = elemento;
+  while (el && el !== document.body) {
+    if (el.classList && el.classList.contains('condicional') && !el.classList.contains('ativo')) {
+      return false;
+    }
+    el = el.parentElement;
+  }
+  return true;
+}
+
+/* =================================================================
+   NAVEGAÇÃO
+   ================================================================= */
+
+function irParaStep(step) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('ativo'));
+  const novoStep = document.querySelector(`.step[data-step="${step}"]`);
+  if (novoStep) novoStep.classList.add('ativo');
+
+  stepAtual = step;
+  atualizarUIStep();
+  atualizarCondicionais();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function atualizarUIStep() {
+  // Progresso
+  const percent = stepAtual === 0 ? 0 : Math.round((stepAtual / CONFIG.TOTAL_STEPS) * 100);
+  progressoFill.style.width = `${percent}%`;
+  progressoPercent.textContent = `${percent}%`;
+  progressoStepLabel.textContent = stepAtual === 0
+    ? 'Introdução'
+    : `Etapa ${stepAtual} de ${CONFIG.TOTAL_STEPS}`;
+
+  // Botões
+  btnVoltar.classList.toggle('invisible', stepAtual === 0);
+
+  if (stepAtual === 0) {
+    btnProximo.textContent = 'Começar →';
+  } else if (stepAtual === CONFIG.TOTAL_STEPS) {
+    btnProximo.textContent = 'Enviar formulário ✓';
+  } else {
+    btnProximo.textContent = 'Próximo →';
+  }
+}
+
+btnProximo.addEventListener('click', () => {
+  if (!validarStep(stepAtual)) return;
+
+  if (stepAtual < CONFIG.TOTAL_STEPS) {
+    irParaStep(stepAtual + 1);
+  } else {
+    enviarFormulario();
+  }
+});
+
+btnVoltar.addEventListener('click', () => {
+  if (stepAtual > 0) irParaStep(stepAtual - 1);
+});
+
+/* =================================================================
+   AUTOSAVE / RESTORE
+   ================================================================= */
+
+function salvarLocalStorage() {
+  const dados = coletarDados();
+  localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({
+    dados,
+    step: stepAtual,
+    timestamp: Date.now()
+  }));
+  mostrarAutosave();
+}
+
+function mostrarAutosave() {
+  autosaveEl.classList.add('visible');
+  clearTimeout(window.__autosaveTimer);
+  window.__autosaveTimer = setTimeout(() => {
+    autosaveEl.classList.remove('visible');
+  }, 2000);
+}
+
+function restaurarLocalStorage() {
+  try {
+    const raw = localStorage.getItem(CONFIG.STORAGE_KEY);
+    if (!raw) return;
+    const { dados, timestamp } = JSON.parse(raw);
+
+    // Expira em 7 dias
+    if (Date.now() - timestamp > 7 * 24 * 60 * 60 * 1000) {
+      localStorage.removeItem(CONFIG.STORAGE_KEY);
+      return;
+    }
+
+    Object.entries(dados).forEach(([nome, valor]) => {
+      const inputs = document.querySelectorAll(`[name="${nome}"]`);
+      inputs.forEach(input => {
+        if (input.type === 'radio' || input.type === 'checkbox') {
+          if (input.value === valor || (Array.isArray(valor) && valor.includes(input.value)) || valor === true) {
+            input.checked = true;
+          }
+        } else {
+          input.value = valor;
+        }
+      });
+    });
+
+    atualizarCondicionais();
+  } catch (err) {
+    console.warn('Falha ao restaurar localStorage:', err);
+  }
+}
+
+let autosaveDebounce;
+form.addEventListener('input', () => {
+  clearTimeout(autosaveDebounce);
+  autosaveDebounce = setTimeout(salvarLocalStorage, 800);
+});
+form.addEventListener('change', () => {
+  clearTimeout(autosaveDebounce);
+  autosaveDebounce = setTimeout(salvarLocalStorage, 200);
+});
+
+/* =================================================================
+   COLETA DE DADOS
+   ================================================================= */
+
+function coletarDados() {
+  const fd = new FormData(form);
+  const dados = {};
+  for (const [k, v] of fd.entries()) {
+    if (dados[k] !== undefined) {
+      if (!Array.isArray(dados[k])) dados[k] = [dados[k]];
+      dados[k].push(v);
+    } else {
+      dados[k] = v;
+    }
+  }
+
+  // Checkboxes não-preenchidos não vêm no FormData; coletar todos os checkboxes
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    if (cb.name && !(cb.name in dados)) {
+      dados[cb.name] = false;
+    } else if (cb.name && cb.checked) {
+      dados[cb.name] = true;
+    }
+  });
+
+  return dados;
+}
+
+/* =================================================================
+   ENVIO
+   ================================================================= */
+
+async function enviarFormulario() {
+  btnProximo.disabled = true;
+  btnProximo.textContent = 'Enviando...';
+
+  const dados = coletarDados();
+  const janela = calcularJanela();
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    janela_calculada: janela,
+    dados
+  };
+
+  let sucessoEnvio = false;
+
+  if (CONFIG.WEBHOOK_URL) {
+    try {
+      const resp = await fetch(CONFIG.WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      sucessoEnvio = resp.ok;
+    } catch (err) {
+      console.error('Falha no envio:', err);
+      sucessoEnvio = false;
+    }
+  } else {
+    // Sem webhook: salva no localStorage com prefixo "submitted_"
+    localStorage.setItem(`motche_submitted_${Date.now()}`, JSON.stringify(payload));
+    console.log('=== DADOS DO FORMULÁRIO (copie para a operação) ===');
+    console.log(JSON.stringify(payload, null, 2));
+    sucessoEnvio = true;
+  }
+
+  if (sucessoEnvio) {
+    localStorage.removeItem(CONFIG.STORAGE_KEY);
+    mostrarSucesso(payload);
+  } else {
+    alert('Houve um erro ao enviar. Por favor, tente novamente em alguns segundos. Se persistir, entre em contato com a Motche pelo WhatsApp.');
+    btnProximo.disabled = false;
+    btnProximo.textContent = 'Enviar formulário ✓';
+  }
+}
+
+function mostrarSucesso(payload) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('ativo'));
+  acoes.style.display = 'none';
+  progressoContainer.style.display = 'none';
+  sucesso.classList.add('ativo');
+
+  // Resumo
+  const resumo = document.getElementById('sucesso-resumo');
+  const d = payload.dados;
+  const janela = payload.janela_calculada;
+
+  resumo.innerHTML = `
+    <div class="sucesso-resumo-titulo">Resumo</div>
+    <div class="sucesso-resumo-item">
+      <span class="sucesso-resumo-label">Pedido</span>
+      <span class="sucesso-resumo-valor">${escapeHtml(d.numero_pedido || '—')}</span>
+    </div>
+    <div class="sucesso-resumo-item">
+      <span class="sucesso-resumo-label">Para</span>
+      <span class="sucesso-resumo-valor">${escapeHtml(d.mae_apelido || d.mae_nome || '—')}</span>
+    </div>
+    <div class="sucesso-resumo-item">
+      <span class="sucesso-resumo-label">Bairro</span>
+      <span class="sucesso-resumo-valor">${escapeHtml(d.end_bairro || '—')}</span>
+    </div>
+    <div class="sucesso-resumo-item">
+      <span class="sucesso-resumo-label">Janela de entrega</span>
+      <span class="sucesso-resumo-valor">
+        ${janela ? `<span class="janela-tag ${janela.janela}">${janela.horario}</span>` : '—'}
+      </span>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+  );
+}
+
+/* =================================================================
+   INICIALIZAÇÃO
+   ================================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+  restaurarLocalStorage();
+  atualizarUIStep();
+  atualizarCondicionais();
+});
+
+</script>
+
+</body>
+</html>
