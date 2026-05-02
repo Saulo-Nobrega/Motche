@@ -2270,12 +2270,19 @@ async function enviarFormulario() {
 
   if (CONFIG.WEBHOOK_URL) {
     try {
+      // IMPORTANTE: usar text/plain para evitar preflight CORS no Google Apps Script.
+      // O Apps Script ainda recebe o JSON via e.postData.contents normalmente.
       const resp = await fetch(CONFIG.WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
       sucessoEnvio = resp.ok;
+      if (!resp.ok) {
+        console.error('Resposta não OK do webhook:', resp.status, resp.statusText);
+      }
     } catch (err) {
       console.error('Falha no envio:', err);
       sucessoEnvio = false;
